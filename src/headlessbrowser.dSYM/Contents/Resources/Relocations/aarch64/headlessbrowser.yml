@@ -1,0 +1,5 @@
+---
+triple:          'arm64-apple-darwin'
+binary-path:     '/Users/aayushsharma/crawler/src/headlessbrowser'
+relocations:     []
+...
