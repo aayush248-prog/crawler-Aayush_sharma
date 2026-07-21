@@ -1,0 +1,1582 @@
+
+
+<!-- <!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search Suggestions</title>
+   
+</head>
+
+<body>
+
+    <h1>Search</h1>
+    <input type="text" id="search" onkeyup="showSuggestions(this.value)" placeholder="Search..."
+        onblur="hideSuggestions()">
+    <div id="suggestions"></div>
+
+</body>
+
+</html> -->
+
+
+
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+  <link href="../images/favicon.png" rel="icon">
+  <style>
+      body, html {
+    overflow-x: inherit !important;
+}
+#suggestions {
+    border: 1px solid #dbdbf1;
+    display: none;
+    position: absolute;
+    background: white;
+    width: 300px;
+    z-index: 999;
+    max-height: 300px;
+    overflow-y: scroll;
+    background: #F3F3F9;
+}
+.suggestion {
+    padding: 10px;
+    cursor: pointer;
+    background-color: #fff;
+    margin: 9px 4px;
+   
+}
+        .navbar {   
+    z-index: 2 !important;
+}
+
+   
+        .suggestion:hover {
+          box-shadow:  0 1px 2px rgba(56, 65, 74, 0.15);
+        }
+
+        .heading {
+          font-weight: bold;
+          color: #1342ff;
+        }
+
+        .sub-heading {
+    color: #001568;
+    font-size: 12px;
+    font-weight: 300;
+    margin-bottom: 8px;
+}
+
+        .text {
+            color: black;
+        }
+
+span.search-icon {
+    display: inline-block;
+    padding: 3px 14px;
+    background-color: #dc0000;
+    color: #fff;
+    font-size: 20px;
+    height: 40px;
+    border-bottom-right-radius: 4px;
+    border-top-right-radius: 4px;
+    margin-top: 2p;
+    box-sizing: border-box;
+}
+input#search {
+    padding: 7px 10px;
+    border: none;
+    height: 40px;
+    border-top-left-radius: 4px;
+    border-bottom-left-radius: 4px;
+    margin-right: -4px;
+    box-sizing: border-box;
+}
+    </style>
+    <script>
+        function showSuggestions(value) {
+            const suggestionsContainer = document.getElementById('suggestions');
+            suggestionsContainer.innerHTML = '';
+
+            if (value.length === 0) {
+                suggestionsContainer.style.display = 'none';
+                return;
+            }
+
+            fetch('search.php?s=' + encodeURIComponent(value))
+                .then(response => response.json())
+                .then(data => {
+                    if (data.length > 0) {
+                        data.forEach(item => {
+                            const suggestionDiv = document.createElement('div');
+                            suggestionDiv.className = 'suggestion';
+
+                            suggestionDiv.innerHTML = `
+                            <a href="${item.link}" target="_blank">
+                                <div class="heading">${item.heading}</div>
+                                <div class="sub-heading">${item.sub_heading}</div>
+                                <div class="text">${item.text}</div>
+                                </a>
+                            `;
+
+
+                           
+
+                            suggestionsContainer.appendChild(suggestionDiv);
+                        });
+                        suggestionsContainer.style.display = 'block';
+                    } else {
+                        suggestionsContainer.style.display = 'none';
+                    }
+                })
+                .catch(error => console.error('Error fetching suggestions:', error));
+        }
+
+        document.addEventListener('click', function (event) {
+            const suggestionsContainer = document.getElementById('suggestions');
+            const searchInput = document.getElementById('search');
+
+            if (!suggestionsContainer.contains(event.target) && event.target !== searchInput) {
+                suggestionsContainer.style.display = 'none';
+            }
+        });
+
+        function hideSuggestions() {
+            const suggestionsContainer = document.getElementById('suggestions');
+            //suggestionsContainer.style.display = 'none';
+        }
+    </script>
+  <!-- <title>UIET Kurukshetra</title> -->
+  <title>UIET - KUK - University Institute of Engineering & Technology Kurukshetra</title>
+  
+  <meta name="description" content="UIET - KUK - The University Institute of Engineering & Technology Kurukshetra is one of the best engineering colleges in India. UIET offer a variety of undergra">
+  <meta name="keywords" content="uiet kuk, uiet kurukshetra, kuk uiet, kuk, University Institute of Engineering & Technology">
+  <meta property="og:locale" content="en_US" />
+  <meta property="og:type" content="website" />
+  <!-- <link rel="canonical" href="https://uietkuk.ac.in/" /> -->
+  <meta name="author" content="CAL Info" />
+  <meta name="robots" content="noodp" />
+  <meta name="distribution" content="Global" />
+  <meta property="og:title" content="UIET - KUK - University Institute of Engineering & Technology Kurukshetra" />
+  <meta property="og:url" content="/" />
+  <meta name="format-detection" content="telephone=no">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="../images/favicon.png">
+  <meta property="og:image:type" content="image/png" />
+  <meta property="og:image:width" content="50">
+  <meta property="og:image:height" content="48">
+  <meta property="og:site_name" content="uietkuk.ac.in" />
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:url" content="/">
+  <meta name="twitter:title" content="UIET - KUK - University Institute of Engineering & Technology Kurukshetra">
+  <meta name="twitter:description" content="UIET - KUK - The University Institute of Engineering & Technology Kurukshetra is one of the best engineering colleges in India. UIET offer a variety of undergra">
+  <meta name="Copyright" content="Copyright 2026 uietkuk.ac.in" /> <!-- Favicon -->
+
+
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:400,500,700%7cRubik:400,500,700&display=swap">
+  <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+  <link rel="stylesheet" href="../css/libraries.css">
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/set2.css">
+  <link rel="stylesheet" href="../css/my.css">
+  <link rel="stylesheet" href="../css/custom.css">
+  <link href="../font/css/font-awesome.css" rel="stylesheet">
+  <link href="../font/css/font-awesome.min.css" rel="stylesheet">
+
+</head>
+
+
+
+<body>
+
+  <!--<div class="differnt_popup1" id="enq1"> <a href="/admission.php"><img src="../images/a.png"> </a></div>-->
+
+  <!--<a href="" class="threesixtyview ss" target="_blank"><img src="../images/360_icon_v2.gif"></a>-->
+
+  <div class="wrapper">
+
+    <div class="left_icons">
+
+      <a title="" href="https://www.facebook.com/ku.uiet"><img src="../images/1.png"></a>
+
+      <!--<a title="" href=""><img src="../images/2.png"></a>
+
+      <a title="" href=""><img src="../images/3.png"></a>
+
+      <a title="" href=""><img src="../images/4.png"></a>-->
+
+    </div>
+
+
+    <header id="header" class="header header-white header-full">
+      <div class="header__topbar ">
+        <div class="container">
+          <div class="row">
+            <div class="col-sm-12 col-md-6 col-lg-6">
+              <ul class="contact__list list-unstyled">
+                <li><i class="fa fa-phone"></i><span></span></li>
+                <li><i class="fa fa-envelope"></i><span>Email: director.uiet@kuk.ac.in</span></li>
+              </ul>
+            </div><!-- /.col-lg-8 -->
+            <div class="col-sm-12 col-md-6 col-lg-6">
+              <ul class="header__topbar-links list-unstyled">
+                <li><a href="https://uietkuk.ac.in/mrcn2023">MRCN 2023</a></li>
+                <li><a href="https://uietkuk.ac.in/mrcn_3dec2024/index2024.php">MRCN 2024</a></li>
+                <li><a href="https://uietkuk.ac.in/mrcn/index.php">MRCN 2025</a></li>
+                <li><a href="https://docs.google.com/forms/d/e/1FAIpQLSewHuRnlujAM1AfaAYOb2wRNiuevL0ke764cTTnCbWTlYqnfg/viewform">Feedback</a></li>
+                <li><a href="contact-us">Contact Us</a></li>
+                <!--<li><a href="#">Grievance Redressal Portal</a></li>-->
+                <!--<li><a href="#">Placement News</a></li>-->
+              </ul>
+            </div>
+            <!-- /.col-lg-4 -->
+          </div><!-- /.row -->
+        </div><!-- /.container -->
+      </div>
+      <div class="header_main">
+        <div class="container">
+          <div class="row">
+            <div class="col-md-8 ">
+              <a class="navbar-brand" href="/">
+                <img src="../images/logo.png" class="logo-light" >
+              </a>
+            </div><!-- /.col-lg-8 -->
+            <div class="col-md-4 ">
+              <div class="logo1 search-block">            
+                
+          <div class="serch-input">
+            <input type="text" id="search" onkeyup="showSuggestions(this.value)" placeholder="Search..."
+        onblur="hideSuggestions()">
+        <span class="search-icon"><i class="fa fa-search"></i></span>
+      </div>
+    <div id="suggestions"></div>
+              </div>
+            </div><!-- /.col-lg-4 -->
+          </div><!-- /.row -->
+        </div><!-- /.container -->
+      </div>
+      <nav class="navbar navbar-expand-lg sticky-navbar">
+        <div class="container">
+          <button class="navbar-toggler" type="button">
+            <span class="menu-lines"><span></span></span>
+          </button>
+          <div class="collapse navbar-collapse" id="mainNavigation">
+            <ul class="navbar-nav">
+              <li class="nav__item"><a href="/" class="nav__item-link">Home</a></li>
+              <li class="nav__item with-dropdown"><a href="" class="dropdown-toggle nav__item-link">Administration</a> <i class="fa fa-angle-right" data-toggle="dropdown"></i>
+                <ul class="dropdown-menu">
+                  <li class="nav__item"><a href="vice-chancellor" class="nav__item-link">Vice Chancellor</a></li>
+                  <li class="nav__item"><a href="registrar" class="nav__item-link">Registrar</a></li>
+                  <li class="nav__item"><a href="director" class="nav__item-link">Director</a></li>
+                  <li class="nav__item"><a href="roll-of-honor-directors-uiet" class="nav__item-link">Roll of Honor – Directors UIET</a></li>
+                </ul>
+              </li>
+              <li class="nav__item with-dropdown"><a href="" class="dropdown-toggle nav__item-link">Department</a> <i class="fa fa-angle-right" data-toggle="dropdown"></i>
+                <ul class="dropdown-menu">
+                  <li class="nav__item"><a href="computer-science-engg-department" class="nav__item-link">Computer Science &amp; Engg. Department</a></li>
+                  <li class="nav__item"><a href="electronics-communication-engg-department-2" class="nav__item-link">Electronics &amp; Communication Engg. Department</a></li>
+                  <li class="nav__item"><a href="mechanical-engg-department" class="nav__item-link">Mechanical Engg. Department</a></li>
+                  <li class="nav__item"><a href="biotechnology-engg-department" class="nav__item-link">Biotechnology Engg. Department</a></li>
+                  <li class="nav__item"><a href="electrical-engg-department" class="nav__item-link">Electrical Engg. Department</a></li>
+                  <li class="nav__item"><a href="Civil.engg.deptt" class="nav__item-link">Civil Engg. Department</a></li>
+                  <li class="nav__item"><a href="AppliedScienceDeptt" class="nav__item-link">Applied Sciences Department</a></li>
+                  <!--<li class="nav__item"><a href="message-from-the-training-and-placement-officer" class="nav__item-link">Message from The Training and Placement Officer</a></li> -->
+                </ul>
+              </li>
+              <li class="nav__item with-dropdown"><a href="" class="dropdown-toggle nav__item-link">Faculty</a> <i class="fa fa-angle-right" data-toggle="dropdown"></i>
+                <ul class="dropdown-menu">
+                  <li class="nav__item"><a href="computer-science-engg" class="nav__item-link">Computer Science &amp; Engg.</a></li>
+                  <li class="nav__item"><a href="electronics-and-communication-engg" class="nav__item-link">Electronics and Communication Engg.</a></li>
+                  <li class="nav__item"><a href="mechanical-engg" class="nav__item-link">Mechanical Engg.</a></li>
+                  <li class="nav__item"><a href="biotechnology" class="nav__item-link">Biotechnology</a></li>
+                  <li class="nav__item"><a href="electrical-engg" class="nav__item-link">Electrical Engg.</a></li>
+                   <li class="nav__item"><a href="civil-engg-departmentt" class="nav__item-link">Civil Engg. Department</a></li>
+                  <li class="nav__item"><a href="applied-sciences" class="nav__item-link">Applied Sciences</a></li>
+                  <!--<li class="nav__item"><a href="ph-d-esearch-scholars" class="nav__item-link">Ph.D. Research Scholars</a></li> -->
+                </ul>
+              </li>
+
+              <li class="nav__item with-dropdown"><a href="" class="dropdown-toggle nav__item-link">Important Link</a> <i class="fa fa-angle-right" data-toggle="dropdown"></i>
+                <ul class="dropdown-menu">
+                 
+                  <!--<li class="nav__item"><a href="student-centre" class="nav__item-link">Student Centre</a></li> -->
+                 <li class="nav__item"><a href="https://iums.kuk.ac.in/login.htm" class="nav__item-link">LMS/IUMS</a></li>
+                <li class="nav__item"><a href="teqip" class="nav__item-link">TEQIP-III</a></li>
+                  <li class="nav__item"><a href="feedback-grievance-suggestion" class="nav__item-link">Feedback / Grievance / Suggestion</a></li>
+                  <li class="nav__item"><a href="nirf" class="nav__item-link">NIRF</a></li>
+                                   <li class="nav__item"><a href="ideas-innovation" class="nav__item-link">Ideas/Innovation</a></li>
+                                   
+                </ul>
+                </ul>
+              </li>
+
+              <li class="nav__item"><a href="Examination" class="nav__item-link">Exam</a></li>
+               <!-- <li class="nav__item with-dropdown"><a href="" class="dropdown-toggle nav__item-link">Online Exam </a> <i class="fa fa-angle-right" data-toggle="dropdown"></i>
+                <ul class="dropdown-menu">
+                  <li class="nav__item"><a href="credit-based" class="nav__item-link">Credit Based </a></li>
+                  <li class="nav__item"><a href="non-credit-based" class="nav__item-link">Non Credit Based </a></li>  -->
+                </ul>
+              </li>
+
+              <li class="nav__item"><a href="admission-form" class="nav__item-link">Admission</a></li>
+              <li class="nav__item with-dropdown"><a href="" class="dropdown-toggle nav__item-link">Academic</a> <i class="fa fa-angle-right" data-toggle="dropdown"></i>
+                <ul class="dropdown-menu">
+                    <li class="nav__item"><a href="../pdf/website-emerging-area-document.pdf" class="nav__item-link" target="_blank">Emerging Areas in B.Tech</a></li>
+                  <li class="nav__item"><a href="../pdf/Name of Program.pdf" class="nav__item-link" target="_blank">Program Offered & Intake</a></li>
+                  <li class="nav__item"><a href="../pdf/R&D_activities.jpg" class="nav__item-link" target="_blank">R&D Activities</a></li>
+                  
+                </ul>
+              </li>
+
+              <li class="nav__item with-dropdown"><a href="downloads" class="dropdown-toggle nav__item-link">Download</a> <i class="fa fa-angle-right" data-toggle="dropdown"></i>
+                <ul class="dropdown-menu">
+                  <li class="nav__item"><a href="general" class="nav__item-link">General & Ph.D. Syllabus</a></li>
+                  <li class="nav__item"><a href="syllabus-b-tech-m-tech" class="nav__item-link">Syllabus B.Tech & M.Tech</a></li>
+                  <li class="nav__item"><a href="time-table-b-tech-m-tech" class="nav__item-link">Time-Table B.Tech & M.Tech.</a></li>
+                  <li class="nav__item"><a href="reports" class="nav__item-link">Reports</a></li>
+                  <li class="nav__item"><a href="aicte-reports" class="nav__item-link">Aicte Reports</a></li>
+                   <li class="nav__item"><a href="Policies" class="nav__item-link">Policies</a></li>
+                  <!-- <li class="nav__item"><a href="aicte-reports1" class="nav__item-link">Aicte Reports(M.Tech)</a></li> -->
+                </ul>
+              </li>
+               <li class="nav__item"><a href="iic.php" class="nav__item-link">IIC/Startup</a></li>
+               <li class="nav__item"><a href="https://uietkuk.ac.in/training_placement_cell-main/" class="nav__item-link">T&P Cell</a></li>
+
+
+            </ul><!-- /.navbar-nav -->
+
+
+            
+ 
+
+          </div><!-- /.navbar-collapse -->
+          <!-- /.navbar-modules -->
+        </div><!-- /.container -->
+      </nav><!-- /.navabr -->
+    </header>
+<section id="slider3" class="slider slider-3">
+  <div class="carousel owl-carousel carousel-arrows carousel-dots" data-slide="1" data-slide-md="1" data-slide-sm="1" data-autoplay="true" data-nav="true" data-dots="true" data-space="0" data-loop="true" data-speed="3000" data-transition="fade" data-animate-out="fadeOut" data-animate-in="fadeIn">
+    <div class="slide-item align-v-h bg-overlay">
+    <div class="bg-img"><img src="images/website.jpg" alt="slide img"></div>
+      </div>
+    <div class="slide-item align-v-h bg-overlay">
+      <div class="bg-img"><img src="images/website2.jpg" alt="slide img"></div>
+    </div>
+    <div class="slide-item align-v-h bg-overlay">
+      <div class="bg-img"><img src="images/website3.jpg" alt="slide img"></div>
+    </div>
+     <div class="slide-item align-v-h bg-overlay">
+      <div class="bg-img"><img src="images/about3.jpg" alt="slide img"></div>
+     </div>
+       <div class="slide-item align-v-h bg-overlay">
+      <div class="bg-img"><img src="images/startup1.jpeg" alt="slide img"></div>
+     </div>
+    <!--</div>
+    <div class="slide-item align-v-h bg-overlay">
+      <div class="bg-img"><img src="images/Startup.jpeg" alt="slide img"></div>-->
+    </div>
+  </div>
+</section>
+
+<div class="garyy sosoo">
+  <div class="container col-padding-0">
+    <div class="row service-items-wrap">
+      <div class=" col-lg-12">
+        <div class="service-item">
+          <div class="ohhh noo">
+  
+            </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="garyy">
+  <div class="container col-padding-0">
+    <div class="row service-items-wrap">
+      <div class="col-sm-12 col-md-10 col-lg-12">
+        <div class="service-item">
+          <div class="ohhh">
+             
+<!--<strong><h4 style="color:#e44f50"> <marquee>It is the matter of great pleasure that "51 students got placed in an On Campus Placement Drive By INFOSYS at UIET" held on 19-20 November 2024.</a></h4></strong></li></</a></marquee></br>-->
+<!--<strong><h4 style="color:#e44f50"> <marquee> All the students are hereby informed to fill the mandatory online Antiragging undertaking (https://forms.gle/LfojdvuTtuvzPRUQ7)
+<!-- <strong><h4 style="color:#e44f50">  <a href="pdf/Skill Devlopment Courses Final-1.pdf"</a> Skill Development Training cum Internship Courses 2025</a></h4></strong></li></</a></br> -->
+<!-- <h4 style="color:#e44f50">  <a href="pdf-1/General Guidelines and details of Physical Counselling, UIET.pdf"</a> General Guidelines and details of B.Tech First Year Physical Counselling 2025-26 </a></h4></strong></li></</a></br>
+<h4 style="color:#e44f50">  <a href="https://www.uietkuk.ac.in/admission-uiet/"</a> Application Form to apply for B.Tech First Year/B.Tech LEET (2nd Year)/B.Tech Biotech PCB Physical Counseling 2025-26</a></h4></strong></li></</a></br>-->
+<h4 style="color:#e44f50">  <a href="https://user.uiet.cloud/login"</a>Online Application Form to apply for B.Tech Physical Counseling 2067-27</a></h4></strong></li></</a></br> 
+<h4 style="color:#e44f50">  <a href="https://www.uietkuk.ac.in/admission_helpline"</a> Admission Helpline 2026</a></h4></strong></li></</a></br> 
+
+
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-6 col-md-6 col-lg-6">
+        <div class="service-item">
+          <div class="ohhh">
+            <!--<h4><a href="non-creditbased.php"></a></h4>-->
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<section id="servicesCarousel" class="services services-carousel pt-30 pb-30">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-4">
+        <div class="admission-tr-page"> <img src="images/dadad.png">
+          <h2 style="color:#654099">Admission Updates</h2>
+                    <marquee direction="up" scrollamount="2" onMouseOver="this.stop()" onMouseOut="this.start()" height="250">
+
+                          <ul class="list-info--1">
+
+                                  <li><strong><a href="super/uploads/Guidelines  For B. Tech. Physical counseling 2026.pdf" target="_blank">Guidelines for physical counseling</a></strong></li>
+                
+              </ul>
+                          <ul class="list-info--1">
+
+                                  <li><strong><a href="super/uploads/Vacant seat position.pdf" target="_blank">Vacant seats position B.Tech 1st year</a></strong></li>
+                
+              </ul>
+                          <ul class="list-info--1">
+
+                                  <li><strong><a href="super/uploads/Hostel Application help manual.pdf" target="_blank">Hostel Application help manual</a></strong></li>
+                
+              </ul>
+                          <ul class="list-info--1">
+
+                                  <li><strong><a href="super/uploads/DOC-20260710-WA0003..pdf" target="_blank">Tentative second merit list for biotechnology PCB</a></strong></li>
+                
+              </ul>
+                          <ul class="list-info--1">
+
+                                  <li><strong><a href="https://user.uiet.cloud/login" target="_blank">Application Form for B.Tech Physical counseling 2026</a></strong></li>
+                
+              </ul>
+                          <ul class="list-info--1">
+
+                                  <li><strong><a href="super/uploads/Advertisement For B. Tech. Physical counseling 2026.pdf" target="_blank">Advertisement for Physical counseling</a></strong></li>
+                
+              </ul>
+                          <ul class="list-info--1">
+
+                                  <li><strong><a href="https://docs.google.com/forms/d/e/1FAIpQLSesIEWnO1w4ha6Lhk_EXtxj6vt8jWZDcLWGFlULymoErPbJ7g/viewform?usp=header" target="_blank">Fee refund form B.tech 2026</a></strong></li>
+                
+              </ul>
+                          <ul class="list-info--1">
+
+                                  <li><strong><a href="super/uploads/FEE_2026.jpeg" target="_blank">Fee Structure for B.Tech Courses 2026-27</a></strong></li>
+                
+              </ul>
+                          <ul class="list-info--1">
+
+                                  <li><strong><a href="https://www.uietkuk.ac.in/admission_helpline" target="_blank">B.Tech Admission Helpline 2026</a></strong></li>
+                
+              </ul>
+                      </marquee>
+          <div class="power-link">
+            <a href="admission-updates.php" class="btn-power "><span>Read More <i class="icon-arrow-right2"></i></span></a>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-lg-4">
+        <div class="admission-tr-page"> <img src="images/calendar-flat.png">
+          <h2 style="color:#334f87">Announcements</h2>
+                    <marquee direction="up" scrollamount="2" onMouseOver="this.stop()" onMouseOut="this.start()" height="250">
+                          <ul class="list-info--1">
+
+                                  <li><strong><a href="super/uploads/Re-open NSP 18.07.2026.pdf" target="_blank">Important notice regarding scholarship</a></strong></li>
+                
+              </ul>
+                          <ul class="list-info--1">
+
+                                  <li><strong><a href="super/uploads/Summons to the students (UMC) .pdf" target="_blank">Summons for UMC Students</a></strong></li>
+                
+              </ul>
+                          <ul class="list-info--1">
+
+                                  <li><strong><a href="super/uploads/Decision of UMC Meeting held on 15.7.2026.pdf" target="_blank">Decision of UMC Committee held on 15.7.2026</a></strong></li>
+                
+              </ul>
+                          <ul class="list-info--1">
+
+                                  <li><strong><a href="super/uploads/Decision of UMC Meeting on 14.7.2026.pdf" target="_blank">Decision of UMC Committee held on 14.7.2026</a></strong></li>
+                
+              </ul>
+                          <ul class="list-info--1">
+
+                                  <li><strong><a href="super/uploads/Ph D Course work Datesheet RM (1).pdf" target="_blank">Datesheet for Ph.D Coursework</a></strong></li>
+                
+              </ul>
+                          <ul class="list-info--1">
+
+                                  <li><strong><a href="super/uploads/UMC Meeting on 15.7.2026.pdf" target="_blank">UMC meeting on 15 July 2026</a></strong></li>
+                
+              </ul>
+                          <ul class="list-info--1">
+
+                                  <li><strong><a href="super/uploads/UMC Meeting on 14.7.2026.pdf" target="_blank">UMC meeting on 14 July 2026</a></strong></li>
+                
+              </ul>
+                          <ul class="list-info--1">
+
+                                  <li><strong><a href="super/uploads/WA_1783581789524.jpeg" target="_blank">Fee Notice July 2026</a></strong></li>
+                
+              </ul>
+                          <ul class="list-info--1">
+
+                                  <li><strong><a href="super/uploads/Decision of UMC Meeting held on 6.7.2026.pdf" target="_blank">Decision of UMC Meeting held on 6.7.2026</a></strong></li>
+                
+              </ul>
+                          <ul class="list-info--1">
+
+                                  <li><strong><a href="super/uploads/UMC Meeting 6.7.2026.pdf" target="_blank">UMC Meeting on 6.7.2026</a></strong></li>
+                
+              </ul>
+                          <ul class="list-info--1">
+
+                                  <li><strong><a href="super/uploads/Reschedule of exam.pdf" target="_blank">Reschedule of datesheet</a></strong></li>
+                
+              </ul>
+                          <ul class="list-info--1">
+
+                                  <li><strong><a href="super/uploads/Reschedule of Mohit Sharma Date Sheet.jpg" target="_blank">Reschedule of Mohit Sharma DateSheet</a></strong></li>
+                
+              </ul>
+                          <ul class="list-info--1">
+
+                                  <li><strong><a href="super/uploads/Final Date sheet 7th Sem CSE.pdf" target="_blank">Final date sheet of 7th sem CSE</a></strong></li>
+                
+              </ul>
+                          <ul class="list-info--1">
+
+                                  <li><strong><a href="super/uploads/Amendement in datesheet.pdf" target="_blank">Amendement in datesheet</a></strong></li>
+                
+              </ul>
+                          <ul class="list-info--1">
+
+                                  <li><strong><a href="super/uploads/Mohit Sharma Date Sheet.jpg" target="_blank">Mohit Sharma datesheet</a></strong></li>
+                
+              </ul>
+                          <ul class="list-info--1">
+
+                                  <li><strong><a href="super/uploads/Reappear Fee Notice CSE.pdf" target="_blank">Reappear Fee Submission CSE</a></strong></li>
+                
+              </ul>
+                          <ul class="list-info--1">
+
+                                  <li><strong><a href="super/uploads/postphone of 7th sem CSE Exam.docx" target="_blank">Postponement of 7th Sem CSE exam</a></strong></li>
+                
+              </ul>
+                          <ul class="list-info--1">
+
+                                  <li><strong><a href="super/uploads/Reappear Practical Exam (ECE) Date Sheet May - June 2026.pdf" target="_blank">Reappear Practical Exam (ECE) Date Sheet May-June 2026</a></strong></li>
+                
+              </ul>
+                          <ul class="list-info--1">
+
+                                  <li><strong><a href="super/uploads/preponement of practical exams.pdf" target="_blank">Preponment of practical exam</a></strong></li>
+                
+              </ul>
+                          <ul class="list-info--1">
+
+                                  <li><strong><a href="super/uploads/B.Tech. ME Reappear practical exam datesheet.pdf" target="_blank">B.tech. ME Reappear practicals date sheet</a></strong></li>
+                
+              </ul>
+                          <ul class="list-info--1">
+
+                                  <li><strong><a href="super/uploads/Ph D Course work Datesheet.pdf" target="_blank">Datesheet of Ph. D Course work</a></strong></li>
+                
+              </ul>
+                          <ul class="list-info--1">
+
+                                  <li><strong><a href="super/uploads/Reevaluation application form (2016 to 2020 batch) for Dec. 25 Exam.pdf" target="_blank">Reevaluation application form (2016 to 2020 batch) for Dec. 25 Exam</a></strong></li>
+                
+              </ul>
+                          <ul class="list-info--1">
+
+                                  <li><strong><a href="super/uploads/IMG-20260516-WA0003(1).jpg" target="_blank">2 day BAJA SAEINDIA WORKSHOP (16-17 MAY 2026)</a></strong></li>
+                
+              </ul>
+                          <ul class="list-info--1">
+
+                                  <li><strong><a href="super/uploads/Ph.D Reevaluation.pdf" target="_blank">Ph.D coursework Reevaluation Result</a></strong></li>
+                
+              </ul>
+                          <ul class="list-info--1">
+
+                                  <li><strong><a href="super/uploads/Final Date sheet 1 & 2 sem.pdf" target="_blank">Date sheet of B Tech 1st and 2nd semester</a></strong></li>
+                
+              </ul>
+                          <ul class="list-info--1">
+
+                                  <li><strong><a href="super/uploads/Amendement of Practical datesheet ECE Branch.pdf" target="_blank">Amendement of Practical datesheet ECE Branch</a></strong></li>
+                
+              </ul>
+                          <ul class="list-info--1">
+
+                                  <li><strong><a href="super/uploads/Final Date sheet 4th Sem (1).pdf" target="_blank">Date sheet of B Tech 4th Sem</a></strong></li>
+                
+              </ul>
+                          <ul class="list-info--1">
+
+                                  <li><strong><a href="super/uploads/Final Date sheet 3rd Sem (1).pdf" target="_blank">Date sheet of B Tech 3rd Sem</a></strong></li>
+                
+              </ul>
+                          <ul class="list-info--1">
+
+                                  <li><strong><a href="super/uploads/Final Date sheet 5th Sem.pdf" target="_blank">Date sheet of B Tech 5th Sem</a></strong></li>
+                
+              </ul>
+                          <ul class="list-info--1">
+
+                                  <li><strong><a href="super/uploads/Final Date sheet 6th Sem (1).pdf" target="_blank">Date sheet of B Tech 6th</a></strong></li>
+                
+              </ul>
+                          <ul class="list-info--1">
+
+                                  <li><strong><a href="super/uploads/Date Sheet Final.docx" target="_blank">Sessional Date Sheet</a></strong></li>
+                
+              </ul>
+                          <ul class="list-info--1">
+
+                                  <li><strong><a href="super/uploads/Final date sheet M Tech 2nd Sem.pdf" target="_blank">Final Date sheet M.Tech 2nd Sem</a></strong></li>
+                
+              </ul>
+                          <ul class="list-info--1">
+
+                                  <li><strong><a href="super/uploads/Final Date sheet 7th Sem.pdf" target="_blank">Final Date sheet 7th Sem</a></strong></li>
+                
+              </ul>
+                          <ul class="list-info--1">
+
+                                  <li><strong><a href="super/uploads/Final Date sheet 8th Sem.pdf" target="_blank">Final Date sheet 8th Sem</a></strong></li>
+                
+              </ul>
+                          <ul class="list-info--1">
+
+                                  <li><strong><a href="super/uploads/Notice regarding reappear fee submission on IUMS May 2026.pdf" target="_blank">Notice regarding reappear fee submission on IUMS May 2026</a></strong></li>
+                
+              </ul>
+                          <ul class="list-info--1">
+
+                                  <li><strong><a href="super/uploads/Reappear Fee Notice May 2026 for Ex Students.pdf" target="_blank">Reappear Fee Notice May 2026 for Ex Students</a></strong></li>
+                
+              </ul>
+                          <ul class="list-info--1">
+
+                                  <li><strong><a href="super/uploads/pending fee 05.05.26.xlsx" target="_blank">List of pending Fee students as on 5.5.26</a></strong></li>
+                
+              </ul>
+                          <ul class="list-info--1">
+
+                                  <li><strong><a href="super/uploads/Amendement of Practical datesheet May 2026.pdf" target="_blank">Amendment of practical date sheet</a></strong></li>
+                
+              </ul>
+                          <ul class="list-info--1">
+
+                                  <li><strong><a href="super/uploads/Practical datesheet May 2026 Even semester (1).pdf" target="_blank">Practical datesheet for even semester</a></strong></li>
+                
+              </ul>
+                          <ul class="list-info--1">
+
+                                  <li><strong><a href="super/uploads/Reevaluation Notice.pdf" target="_blank">Reevaluation notice for Dec. 25 exam id</a></strong></li>
+                
+              </ul>
+            
+          </marquee>
+
+          <div class="power-link">
+            <a href="announcements.php" class="btn-power "><span>Read More <i class="icon-arrow-right2"></i></span></a>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-4">
+        <div class="admission-tr-page"> <img src="images/5.png">
+          <h2 style="color:#e44f50">Notifications</h2>
+                    <marquee direction="up" scrollamount="2" onMouseOver="this.stop()" onMouseOut="this.start()" height="250">
+                          <ul class="list-info--1">
+
+                                  <li><strong><a href="super/uploads/ECE Internship Form.pdf" target="_blank">Registration Form for Internship in ECE Department</a></strong></li>
+                
+              </ul>
+                          <ul class="list-info--1">
+
+                                  <li><strong><a href="super/uploads/working_clickable_flyer (1).pdf" target="_blank">Skill Development Training Cum Internship Course in Computer science &amp; Engineering Department</a></strong></li>
+                
+              </ul>
+                          <ul class="list-info--1">
+
+                                  <li><strong><a href="super/uploads/advt CSE UIET.pdf" target="_blank">Advt Part Time Teacher CSE Deptt</a></strong></li>
+                
+              </ul>
+                          <ul class="list-info--1">
+
+                                  <li><strong><a href="super/uploads/Interview for Maths and English (1).pdf" target="_blank">Interview for Maths and English</a></strong></li>
+                
+              </ul>
+                          <ul class="list-info--1">
+
+                                  <li><strong><a href="super/uploads/BONAFIDE CERTIFICATE .doc" target="_blank">Format for Bonafide Certificate</a></strong></li>
+                
+              </ul>
+                          <ul class="list-info--1">
+
+                                  <li><strong><a href="super/uploads/Skill Devlopment Courses Final-1.pdf" target="_blank">Skill Development Training cum Internship Courses 2025</a></strong></li>
+                
+              </ul>
+                          <ul class="list-info--1">
+
+                                  <li><strong><a href="super/uploads/MOI_Ver_Backlog_Feb24.pdf" target="_blank">Notice for MOI/Document verification and Backlog Certificate</a></strong></li>
+                
+              </ul>
+                          <ul class="list-info--1">
+
+                                  <li><strong><a href="super/uploads/Mental health awareness cell notification.pdf" target="_blank">Notification Mental Health Awareness Cell &amp; Helpline Number</a></strong></li>
+                
+              </ul>
+                          <ul class="list-info--1">
+
+                                  <li><strong><a href="super/uploads/Interview for Maths and English (1).pdf" target="_blank">Engagement of Part Time Teacher in Applied Science Department, UIET</a></strong></li>
+                
+              </ul>
+                      </marquee>
+          <div class="power-link">
+            <a href="news-events.php" class="btn-power "><span>Read More <i class="icon-arrow-right2"></i></span></a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<section id="about2" class="about about-2 pt-30 pb-30">
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-12 col-md-12 col-lg-7">
+        <div class="heading heading-3 mb-20">
+          <h2 class="heading__title">Welcome to <span class="red">UIET Kurukshetra</span></h2>
+          <hr class="hr1">
+        </div>
+        <div class="about__text">
+          <p>University Institute of Engineering & Technology (UIET) was established by Kurukshetra University in 2004 with objective to develop as a "Centre of Excellence" and offer quality technical education and to undertake research in Engineering & Technology. <br><br>Presently, the institute is offering six B. Tech Courses (Computer Science & Engineering,Computer Science & Engineering (AI & ML), Electronics and Communication Engineering, Electrical & Computer Engineering, Biotechnology and Mechanical Engineering) and seven M. Tech. courses in the technically important disciplines Computer Science & Engineering, Electronics and Communication Engineering, Mechanical Engg. (with the specialization of Industrial & Production Engg., and Thermal Engg.), Biotechnology, Defence Technology and Electrical Engg.</p>
+          <a href="vice-chancellor.php" class="btn btn__primary "><span><i class="icon-arrow-right2"></i></span></a>
+          <!--<a href="vice-chancellor.php" class="btn btn__primary popup-video"><span>Read More <i class="icon-arrow-right2"></i></span></a>-->
+        </div>
+      </div><!-- /.col-lg-4 -->
+      <div class="col-sm-15 col-md-8 col-lg-5">
+        <div class="about__img">
+          <img src="images/about3.jpg" class="img-fluid">
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="about2" class="about about-2 pt-30 pb-30">
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-6 col-md-2 col-lg-2">
+        <div class="l-left">
+          <img src="images/directoruiet.jpeg" class="logo-loji">
+        </div>
+      </div>
+      <div class="col-sm-6 col-md-4 col-lg-4">
+        <div class="l-left">
+          <div class="prof kiji">
+            <h5 style="text-align:left">Prof.Sunil Dhingra</h5>
+            <p><strong>Director, UIET KUK.</strong></p>
+            <p>It gives me immense pleasure to introduce University Institute of Engineering and Technology (UIET) which was established in 2004 in the campus of Kurukshetra University. 
+         
+          <div class="power-link">
+            <a href="director.php" class="btn-power "><span>Read More <i class="icon-arrow-right2"></i></span></a>
+          </div>
+          
+          
+          
+
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-6 col-md-2 col-lg-2">
+        <div class="l-left">
+          <img src="images/VC2020-1-842x1024.jpg" class="logo-loji">
+        </div>
+      </div>
+      <div class="col-sm-6 col-md-4 col-lg-4">
+        <div class="l-left">
+          <div class="prof kiji">
+            <h5 style="text-align:left">Prof. Som Nath Sachdeva</h5>
+            <p><strong>Vice-Chancellor</strong><br>
+              <strong>Kurukshetra University</strong>
+            </p>
+            <p>It is a matter of great pride that UIET was established in 2004 and established itself as a premier Institution in the state of Haryana, imparting technical & valuable engineering education with good placements. </p>
+          
+           <div class="power-link">
+            <a href="vice-chancellor.php" class="btn-power "><span>Read More <i class="icon-arrow-right2"></i></span></a>
+          </div>
+          
+          
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <br><br>
+</section>
+
+<section id="banner2" class="banner-2 fancybox-white pt-0 pb-0">
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-12 col-md-12 col-lg-10 offset-lg-1">
+        <div class="heading heading-3 text-center mb-40">
+          <h2 class="heading__title">Courses Offered</h2>
+          <hr class="hr">
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-4">
+        <div class="coooo text-center">
+          <div class="thumb_course">
+            <img src="images/computer.png">
+          </div>
+          <h3 class="daljit-d" style="text-align:center">Computer Science & Engg. Department</h3>
+          <p class="yoyo"><a class="" href="computer-science-engg-department.php">Read More</a></p>
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="coooo text-center">
+          <div class="thumb_course">
+            <img src="images/ele-11.png">
+          </div>
+          <h3 class="daljit-d" style="text-align:center">Electronics & Comm. Engg Department.</h3>
+          <p class="yoyo"><a class="" href="electronics-communication-engg-department-2.php">Read More</a></p>
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="coooo text-center">
+          <div class="thumb_course">
+            <img src="images/machh.png">
+          </div>
+          <h3 class="daljit-d" style="text-align:center">Mechanical Engg. Department</h3>
+          <p class="yoyo"><a class="" href="mechanical-engg-department.php">Read More</a></p>
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="coooo text-center">
+          <div class="thumb_course">
+            <img src="images/bbio.png">
+          </div>
+          <h3 class="daljit-d" style="text-align:center">Biotechnology Department</h3>
+          <p class="yoyo"><a class="" href="biotechnology-engg-department.php">Read More</a></p>
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="coooo text-center">
+          <div class="thumb_course">
+            <img src="images/powerrr.png">
+          </div>
+          <h3 class="daljit-d" style="text-align:center">Electrical Engineering Department</h3>
+          <p class="yoyo"><a class="" href="electrical-engg-department.php">Read More</a></p>
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="coooo text-center">
+          <div class="thumb_course">
+            <img src="images/civil-engg-logo.png">
+             </div>
+          <h3 class="daljit-d" style="text-align:center">Civil Engineering Department</h3>
+          <p class="yoyo"><a class="" href="Civil-Engineering.php">Read More</a></p>
+        </div>
+      </div>
+    </div>
+  </div>
+  </div>
+        <!--  </div>
+          <h3 class="daljit-d" style="text-align:center">Applied Sciences Department</h3>
+          <p class="yoyo"><a class="" href="applied-sciences.php">Read More</a></p>
+        </div>
+      </div>
+    </div>
+  </div>
+  </div> -->
+</section>
+
+<!--<section id="banner2" class="banner-2 fancybox-white pt-0 pb-0">
+
+      <div class="container-fluid">
+
+      <div class="row">
+
+          <div class="col-sm-12 col-md-12 col-lg-10 offset-lg-1">
+
+            <div class="heading heading-3 text-center mb-40">
+
+              <h2 class="heading__title">Courses Offered</h2>
+
+              <hr class="hr">
+
+            </div>
+
+          </div>
+
+        </div>
+
+        <div class="row">
+
+        <div class="col-sm-12 col-md-12 col-lg-4 p0">
+
+    <div class="grid">
+
+					<figure class="effect-ming minn">
+
+						<img src="images/img3.jpg">
+
+						<figcaption>
+
+							<h4><i class="fa fa-desktop" aria-hidden="true"></i></h4>
+
+							<h3 class="styyy">Computer Science & Engg.</h3>
+
+							<p>Our experienced and highly qualified faculty are committed to helping our students in improving and enhancing their analytical</p>
+
+							<a href="computer-science-engg-department.php">Read More</a>
+
+						</figcaption>			
+
+					</figure>					
+
+				</div></div><div class="col-sm-12 col-md-12 col-lg-4 p0">
+
+    <div class="grid">
+
+					<figure class="effect-ming minn">
+
+						<img src="images/img5.jpg">
+
+						<figcaption>
+
+                        	<h4><i class="fa fa-bank"></i></h4>
+
+                        	<h3 class="styyy">Electronics & Comm. Engg.</h3>
+
+							<p>Our experienced and highly qualified faculty are committed to helping our students in improving and enhancing their analytical</p>
+
+							<a href="electronics-communication-engg-department-2.php">Read More</a>
+
+						</figcaption>			
+
+					</figure>					
+
+				</div></div><div class="col-sm-12 col-md-12 col-lg-4 p0">
+
+    <div class="grid">
+
+					<figure class="effect-ming minn">
+
+						<img src="images/img6.jpg">
+
+						<figcaption>
+
+                        <h4><i class="fa fa-car" aria-hidden="true"></i></h4>
+
+							<h3 class="styyy">Mechanical Engg.</h3>
+
+							<p>Our experienced and highly qualified faculty are committed to helping our students in improving and enhancing their analytical</p>
+
+							<a href="mechanical-engg-department.php">Read More</a>
+
+						</figcaption>			
+
+					</figure>					
+
+				</div></div><div class="col-sm-12 col-md-12 col-lg-4 p0">
+
+    <div class="grid">
+
+					<figure class="effect-ming minn">
+
+						<img src="images/img1.jpg">
+
+						<figcaption>
+
+                        <h4><i class="fa fa-medkit" aria-hidden="true"></i></h4>
+
+							<h3 class="styyy">Biotechnology</h3>
+
+							<p>Our experienced and highly qualified faculty are committed to helping our students in improving and enhancing their analytical</p>
+
+							<a href="biotechnology-engg-department.php">Read More</a>
+
+						</figcaption>			
+
+					</figure>					
+
+				</div></div>
+
+        <div class="col-sm-12 col-md-12 col-lg-4 p0">
+
+    <div class="grid">
+
+					<figure class="effect-ming minn">
+
+						<img src="images/img2.jpg">
+
+						<figcaption>
+
+                        	<h4><i class="fa fa-tools"></i></h4>
+
+							<h3 class="styyy">Electrical Engineering</h3>
+
+							<p>Our experienced and highly qualified faculty are committed to helping our students in improving and enhancing their analytical</p>
+
+							<a href="electrical-engg-department.php">Read More</a>
+
+						</figcaption>			
+
+					</figure>					
+
+				</div></div><div class="col-sm-12 col-md-12 col-lg-4 p0">
+
+    <div class="grid">
+
+					<figure class="effect-ming minn">
+
+						<img src="images/img4.jpg">
+
+						<figcaption>
+
+                        <h4><i class='fa fa-flask'></i></h4>
+
+							<h3 class="styyy">Applied Sciences</h3>
+
+							<p>Our experienced and highly qualified faculty are committed to helping our students in improving and enhancing their analytical</p>
+
+							<a href="applied-sciences.php">Read More</a>
+
+						</figcaption>			
+
+					</figure>					
+
+				</div></div>
+
+        </div>
+
+      </div>
+
+    </section>-->
+
+<section id="servicesLayout3" class="services services-layout3 pt-120 pb-120 bg-gray">
+  <div class="container col-padding-0">
+    <div class="row service-items-wrap">
+      <div class="col-sm-6 col-md-6 col-lg-4">
+        <div class="service-item">
+          <div class="service__content">
+            <div class="service__icon"><img src="images/jiiii.png" class="logo-loji"></div>
+            <h4 class="service__title"><a style="color: white;" href="uiet-at-glance.php">UIET at Glance</a></h4>
+            <p class="service__desc">University Institute of Engineering & Technology (UIET) was established by Kurukshetra University in 2004                                                                                                                                                   
+            
+            
+            
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-sm-6 col-md-6 col-lg-4">
+        <div class="service-item">
+          <div class="service__content">
+            <div class="service__icon"><img src="images/wjij.png" class="logo-loji"></div>
+            <h4 class="service__title">Vision</h4>
+            <p class="service__desc">To Contribibute to the Nation through best practices in Technical Education and be recognized as one of the most Comprehensive Institute in India. 
+            
+            
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- /.col-lg-3 -->
+
+      <div class="col-sm-6 col-md-6 col-lg-4">
+        <div class="service-item">
+          <div class="service__content">
+            <div class="service__icon"><img src="images/dfmoam.png" class="logo-loji"></div>
+            <h4 class="service__title"><a style="color: white;" href="mission.php">Mission</a></h4>
+            <p class="service__desc">To Educate the Students of Engineering & Technology by providing Value Based Technical Education. To produce skilled Engineering Graduates to cater to the needs of Industry and society.
+            To develop dynamic and innovative researchers/entrepreneurs in the field of Enineering and Technology</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="clients" class="clients clients-1 border-top">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-12 col-md-12 col-lg-12">
+                    <h2 class="heading__title" style="text-align:center">Our Recruiters</h2>
+                    <div class="divider__line divider__theme divider__center mb-0"></div>
+                    <br><br><br>
+                    <div class="carousel owl-carousel owl-loaded owl-drag" data-slide="6" data-slide-md="4"
+                        data-slide-sm="2" data-autoplay="true" data-nav="false" data-dots="false" data-space="20"
+                        data-loop="true" data-speed="700">
+
+
+                        <div class="owl-stage-outer">
+                            <div class="owl-stage"
+                                style="transform: translate3d(-2870px, 0px, 0px); transition: all 0s ease 0s; width: 11275px;">
+                                <div class="owl-item cloned" style=" margin-right: 20px;">
+                                    <div class="client">
+                                        <a href="#"><img src="images/patner-logo1.png" alt="client"></a>
+                                    </div>
+                                </div>
+                                <div class="owl-item cloned" style=" margin-right: 20px;">
+                                    <div class="client">
+                                        <a href="#"><img src="images/patner-logo2.png" alt="client"></a>
+                                    </div>
+                                </div>
+                                <div class="owl-item cloned" style=" margin-right: 20px;">
+                                    <div class="client">
+                                        <a href="#"><img src="images/patner-logo3.png" alt="client"></a>
+                                    </div>
+                                </div>
+                                <div class="owl-item cloned" style=" margin-right: 20px;">
+                                    <div class="client">
+                                        <a href="#"><img src="images/patner-logo4.png" alt="client"></a>
+                                    </div>
+                                </div>
+                                <div class="owl-item cloned" style=" margin-right: 20px;">
+                                    <div class="client">
+                                        <a href="#"><img src="images/patner-logo5.png" alt="client"></a>
+                                    </div>
+                                </div>
+                                <div class="owl-item cloned" style=" margin-right: 20px;">
+                                    <div class="client">
+                                        <a href="#"><img src="images/patner-logo6.png" alt="client"></a>
+                                    </div>
+                                </div>
+                                <div class="owl-item cloned" style=" margin-right: 20px;">
+                                    <div class="client">
+                                        <a href="#"><img src="images/patner-logo7.png" alt="client"></a>
+                                    </div>
+                                </div>
+                                <div class="owl-item cloned" style=" margin-right: 20px;">
+                                    <div class="client">
+                                        <a href="#"><img src="images/patner-logo8.png" alt="client"></a>
+                                    </div>
+                                </div>
+                                <div class="owl-item cloned" style=" margin-right: 20px;">
+                                    <div class="client">
+                                        <a href="#"><img src="images/patner-logo9.png" alt="client"></a>
+                                    </div>
+                                </div>
+                                <div class="owl-item cloned" style=" margin-right: 20px;">
+                                    <div class="client">
+                                        <a href="#"><img src="images/patner-logo10.png" alt="client"></a>
+                                    </div>
+                                </div>
+                                <div class="owl-item cloned" style=" margin-right: 20px;">
+                                    <div class="client">
+                                        <a href="#"><img src="images/patner-logo11.png" alt="client"></a>
+                                    </div>
+                                </div>
+                                <div class="owl-item cloned" style=" margin-right: 20px;">
+                                    <div class="client">
+                                        <a href="#"><img src="images/patner-logo12.png" alt="client"></a>
+                                    </div>
+                                </div>
+
+                                <div class="owl-item cloned" style=" margin-right: 20px;">
+                                    <div class="client">
+                                        <a href="#"><img src="images/patner-logo1.png" alt="client"></a>
+                                    </div>
+                                </div>
+                                <div class="owl-item cloned" style=" margin-right: 20px;">
+                                    <div class="client">
+                                        <a href="#"><img src="images/patner-logo2.png" alt="client"></a>
+                                    </div>
+                                </div>
+                                <div class="owl-item cloned" style=" margin-right: 20px;">
+                                    <div class="client">
+                                        <a href="#"><img src="images/patner-logo3.png" alt="client"></a>
+                                    </div>
+                                </div>
+                                <div class="owl-item cloned" style=" margin-right: 20px;">
+                                    <div class="client">
+                                        <a href="#"><img src="images/patner-logo4.png" alt="client"></a>
+                                    </div>
+                                </div>
+                                <div class="owl-item cloned" style=" margin-right: 20px;">
+                                    <div class="client">
+                                        <a href="#"><img src="images/patner-logo5.png" alt="client"></a>
+                                    </div>
+                                </div>
+                                <div class="owl-item cloned" style=" margin-right: 20px;">
+                                    <div class="client">
+                                        <a href="#"><img src="images/patner-logo6.png" alt="client"></a>
+                                    </div>
+                                </div>
+                                <div class="owl-item cloned" style=" margin-right: 20px;">
+                                    <div class="client">
+                                        <a href="#"><img src="images/patner-logo7.png" alt="client"></a>
+                                    </div>
+                                </div>
+                                <div class="owl-item cloned" style=" margin-right: 20px;">
+                                    <div class="client">
+                                        <a href="#"><img src="images/patner-logo8.png" alt="client"></a>
+                                    </div>
+                                </div>
+                                <div class="owl-item cloned" style=" margin-right: 20px;">
+                                    <div class="client">
+                                        <a href="#"><img src="images/patner-logo9.png" alt="client"></a>
+                                    </div>
+                                </div>
+                                <div class="owl-item cloned" style=" margin-right: 20px;">
+                                    <div class="client">
+                                        <a href="#"><img src="images/patner-logo10.png" alt="client"></a>
+                                    </div>
+                                </div>
+                                <div class="owl-item cloned" style=" margin-right: 20px;">
+                                    <div class="client">
+                                        <a href="#"><img src="images/patner-logo11.png" alt="client"></a>
+                                    </div>
+                                </div>
+                                <div class="owl-item cloned" style=" margin-right: 20px;">
+                                    <div class="client">
+                                        <a href="#"><img src="images/patner-logo12.png" alt="client"></a>
+                                    </div>
+                                </div>
+
+                                <div class="owl-item cloned" style=" margin-right: 20px;">
+                                    <div class="client">
+                                        <a href="#"><img src="images/patner-logo1.png" alt="client"></a>
+                                    </div>
+                                </div>
+                                <div class="owl-item cloned" style=" margin-right: 20px;">
+                                    <div class="client">
+                                        <a href="#"><img src="images/patner-logo2.png" alt="client"></a>
+                                    </div>
+                                </div>
+                                <div class="owl-item cloned" style=" margin-right: 20px;">
+                                    <div class="client">
+                                        <a href="#"><img src="images/patner-logo3.png" alt="client"></a>
+                                    </div>
+                                </div>
+                                <div class="owl-item cloned" style=" margin-right: 20px;">
+                                    <div class="client">
+                                        <a href="#"><img src="images/patner-logo4.png" alt="client"></a>
+                                    </div>
+                                </div>
+                                <div class="owl-item cloned" style=" margin-right: 20px;">
+                                    <div class="client">
+                                        <a href="#"><img src="images/patner-logo5.png" alt="client"></a>
+                                    </div>
+                                </div>
+                                <div class="owl-item cloned" style=" margin-right: 20px;">
+                                    <div class="client">
+                                        <a href="#"><img src="images/patner-logo6.png" alt="client"></a>
+                                    </div>
+                                </div>
+                                <div class="owl-item cloned" style=" margin-right: 20px;">
+                                    <div class="client">
+                                        <a href="#"><img src="images/patner-logo7.png" alt="client"></a>
+                                    </div>
+                                </div>
+                                <div class="owl-item cloned" style=" margin-right: 20px;">
+                                    <div class="client">
+                                        <a href="#"><img src="images/patner-logo8.png" alt="client"></a>
+                                    </div>
+                                </div>
+                                <div class="owl-item cloned" style=" margin-right: 20px;">
+                                    <div class="client">
+                                        <a href="#"><img src="images/patner-logo9.png" alt="client"></a>
+                                    </div>
+                                </div>
+                                <div class="owl-item cloned" style=" margin-right: 20px;">
+                                    <div class="client">
+                                        <a href="#"><img src="images/patner-logo10.png" alt="client"></a>
+                                    </div>
+                                </div>
+                                <div class="owl-item cloned" style=" margin-right: 20px;">
+                                    <div class="client">
+                                        <a href="#"><img src="images/patner-logo11.png" alt="client"></a>
+                                    </div>
+                                </div>
+                                <div class="owl-item cloned" style=" margin-right: 20px;">
+                                    <div class="client">
+                                        <a href="#"><img src="images/patner-logo12.png" alt="client"></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="owl-nav disabled"><button type="button" role="presentation" class="owl-prev"><span
+                                    aria-label="Previous">‹</span></button><button type="button" role="presentation"
+                                class="owl-next"><span aria-label="Next">›</span></button></div>
+                        <div class="owl-dots disabled"></div>
+                        <div class="owl-thumbs"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+<!--<div class="coco-c">
+
+      <div class="container">
+
+        <div class="row">
+
+          <div class="col-sm-12 col-md-12 col-lg-6 offset-lg-3">
+
+            <div class="heading text-center mb-50">
+
+              <h2 class="heading__title">Our Recruiters</h2>
+
+              <div class="divider__line divider__theme divider__center mb-0"></div>
+
+            </div>
+
+          </div>
+
+        </div>
+
+        <div class="row">
+
+          <div class="col-sm-12 col-md-6 col-lg-4">
+
+            <div class="blog-item">
+
+              <div class="blog__img">
+
+                <a href="#">
+
+                  <img class="jiii" src="images/amazon.jpg" alt="blog image">
+
+                </a>
+
+              </div>
+
+            </div>
+
+          </div>
+
+          <div class="col-sm-12 col-md-6 col-lg-4">
+
+            <div class="blog-item">
+
+              <div class="blog__img">
+
+                <a href="#">
+
+                  <img class="jiii" src="images/camm.jpg" alt="blog image">
+
+                </a>
+
+              </div>
+
+            </div>
+
+          </div>
+
+          <div class="col-sm-12 col-md-6 col-lg-4">
+
+            <div class="blog-item">
+
+              <div class="blog__img">
+
+                <a href="#">
+
+                  <img class="jiii" src="images/info-q.jpg" alt="blog image">
+
+                </a>
+
+              </div>
+
+            </div>>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>-->
+
+<footer id="footer" class="footer footer-1">
+  <div class="footer-top">
+    <div class="container">
+      <div class="row">
+        <!--<div class="col-sm-12 col-md-12 col-lg-3 footer__widget footer__widget-about mb-30">
+              <div class="footer__widget-content">
+                <h6 class="footer__widget-title">About UIET Kurukshetra</h6>
+                <p class="text-justify">University Institute of Engineering & Technology (UIET) was established by Kurukshetra University in 2004 with objective to develop as a "Centre of Excellence" and offer quality technical education and to undertake research in Engineering & Technology.<br><br>Presently, the institute is offering four B. Tech (Computer Science & Engineering, Electronics and Communication Engineering, Biotechnology and Mechanical Engineering) and eight M. Tech.</p>                
+              </div>
+            </div>-->
+        <!-- /.col-lg-4 -->
+        <div class="col-6 col-sm-6 col-md-4 col-lg-4 footer__widget footer__widget-nav">
+          <h6 class="footer__widget-title">Quick Links</h6>
+          <div class="footer__widget-content">
+            <nav>
+              <ul class="list-unstyled">
+                <li><a href="pdf/Library10.pdf" target="_blank">» Library details</a></li>
+                <li><a href="pdf/FEE_2026.jpeg" target="_blank">» Fee Stucture for B.Tech Courses</a></li>
+                <li><a href="pdf/NCC Presentation 5-9-23 (1).pdf" target="_blank">» NCC</a></li>
+                <li><a href="scholarship-section">» Scholarship section</a></li>
+                <!--<li><ahref="https://docs.google.com/forms/d/e/1FAIpQLSewHuRnlujAM1AfaAYOb2wRNiuevL0ke764cTTnCbWTlYqnfg/viewform">»
+                    Feedback Form for Students</a></li>-->
+                <li><a
+                    href="https://docs.google.com/forms/d/e/1FAIpQLScs_65te_-_Z-36q6M3pQK58ejc-HcVPtrfc6A-cMjLWWOBgA/viewform">»
+                    Application form for Educational Verification/Confidential Result (UIET, KUK)</a></li>
+                <li><a
+                    href="https://docs.google.com/forms/d/e/1FAIpQLSc-sKZCaoXPpn0a_1pwR3VTF7rRWLSHE6yOFewrrhrblAFMxA/viewform">»
+                    Mandatory form to be filled before applying for for Character Certificate / 8th Sem Marksheet
+                    /Degree/backlog(if any) /Caution Money / Migration / Medium of Instruction etc.</a></li>
+                <li><a href="https://www.aicte-india.org/">» AICTE</a></li>
+                <li><a href="https://fellowship.aicte.gov.in/">» AICTE Scholarship/Fellowship Schemes</a></li>
+                <li><a href="https://ess.inflibnet.ac.in/" target="_blank">» e-shodhsindhu</a></li>
+                <li><a href="https://www.uietkuk.ac.in/online-fee/">» Online Fee Payment</a></li>
+              </ul>
+            </nav>
+          </div><!-- /.footer-widget-content -->
+        </div>
+        <div class="col-6 col-sm-6 col-md-3 col-lg-3 footer__widget footer__widget-nav">
+          <h6 class="footer__widget-title">Quick Links</h6>
+          <div class="footer__widget-content">
+            <nav>
+              <ul class="list-unstyled">
+                <li><a href="https://spark.adobe.com/page/GdVm81QfeuJb2/">» UIET in News</a></li>
+                <li><a href="https://www.uietkuk.ac.in/aicte-idea-lab.php/">» AICTE IDEA LAB</a></li>
+                 <li><a href="pdf-1/mandatory Disclosure.pdf" target="_blank">» Mandatory Disclosure</a></li>
+               <!-- <li><a href="mandatory-disclosure">» Mandatory Disclosure</a></li>
+                <li><a href="mou">» MOU</a></li>
+                               <!-- <li><a href="http://10.0.0.8/LocalGuru">» NPTEL e-resource (LAN users)</a></li>-->
+                <li><a href="pdf/CLUB BOARD.jpg" target="_blank">» UIET clubs for students</a></li>
+                 <li><a href="pdf/SAE Club Webpage.pdf" target="_blank">» SAE Collegiate Club UIET</a></li>
+                 <li><a href="pdf/Procedure for verification of Educational qualification.pdf" target="_blank">» Procedure for educational qualification verification</a></li>               
+                <li><a href="pdf-1/Schedule_session_2025-26.pdf" target="_blank">» Academic Calendar for Engg. (Session:
+                    2025-26)</a></li>
+               <!-- <li><a href="http://webmail.uietkuk.org/">» UIET Webmail</a></li> -->
+              </ul>
+            </nav>
+          </div>
+        </div>
+        <!-- /.col-lg-2 -->
+        <!--<div class="col-6 col-sm-6 col-md-3 col-lg-3 footer__widget footer__widget-nav">
+              <h6 class="footer__widget-title">Department Wise Faculties</h6>
+              <div class="footer__widget-content"><nav>
+<ul class="list-unstyled">
+      <li class="nav__item"><a href="computer-science-engg.php" class="nav__item-link">» Computer Science &amp; Engg.</a></li>
+      <li class="nav__item"><a href="electronics-and-communication-engg.php" class="nav__item-link">» Electronics and Communication Engg.</a></li>
+      <li class="nav__item"><a href="mechanical-engg.php" class="nav__item-link">» Mechanical Engg.</a></li>
+      <li class="nav__item"><a href="biotechnology.php" class="nav__item-link">» Biotechnology</a></li>
+      <li class="nav__item"><a href="electrical-engg.php" class="nav__item-link">» Electrical Engg.</a></li>
+      <li class="nav__item"><a href="applied-sciences.php" class="nav__item-link">» Applied Sciences</a></li>
+      <li class="nav__item"><a href="ph-d-esearch-scholars.php" class="nav__item-link">» Ph.D. Research Scholars</a></li>
+    </ul>
+</nav>
+</div>
+            </div>-->
+        <div class="col-sm-12 col-md-12 col-lg-4 footer__widget footer__widget-about  mb-30">
+          <div class="footer__widget-content">
+            <h3 class="footer__widget-title">Contact Us</h3>
+            <i class="fa fa-map-marker"></i>
+            <p><strong>University Institute of Engineering and Technology, Kurukshetra University</strong><br>
+              Pehowa Road, University, Haryana 136119</p>
+            <i class="fa fa-envelope"></i>
+            <p> <a href="mailto:director.uiet@kuk.ac.in">director.uiet@kuk.ac.in</a></p>
+            <i class="fa fa-phone"></i>
+            <p> <a href="tel:" class="font-weight-bold color-white">01744-239155</a></p>
+            <i class="fa fa-map"></i>
+            <p> <a href="http://www.kuk.ac.in">www.kuk.ac.in</a></p>
+
+            <div id="visitorCount">
+
+            </div>
+          </div>
+        </div>
+        <!-- /.col-lg-2 -->
+        <!-- /.col-lg-4 -->
+      </div><!-- /.row -->
+      <br>
+    </div><!-- /.container -->
+  </div><!-- /.footer-top -->
+  <div class="footer-bottom">
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-12 col-md-12 col-lg-12">
+          <div class="footer__copyright">
+            <nav>
+              <ul class="list-unstyled footer__copyright-links d-flex flex-wrap">
+                <li>
+                  &copy; 2023 UIET Kurukshetra. <a href="https://calinfo.in/" target="_blank">Website maintained By :
+                    CSE Deptt., UIET</a>
+                </li>
+              </ul>
+            </nav>
+          </div><!-- /.Footer-copyright -->
+        </div><!-- /.col-lg-6 -->
+        <!-- /.col-lg-6 -->
+      </div><!-- /.row -->
+    </div><!-- /.Footer-bottom -->
+  </div><!-- /.container -->
+</footer>
+<button id="scrollTopBtn"><i class="fa fa-long-arrow-up"></i></button>
+<div class="cp-widget-button1">
+  <div data-brand-color="background" onclick="show()" class="cp-widget-button__inner1"><a href="tel:"><img
+        src="../images/call1.png"></a></div>
+</div><!-- /.module-search-container -->
+<div class="cp-widget-button">
+  <div data-brand-color="background" onclick="show()" class="cp-widget-button__inner"><a
+      href="https://api.whatsapp.com/send?phone="><img src="../images/whatsapp.png"></a></div>
+</div>
+</div><!-- /.wrapper -->
+<!--http://7oroof.com/demos/industic/-->
+<script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+<script src="../js/plugins.js"></script>
+<script src="../js/main.js"></script>
+
+
+<script>
+  // Function to update the counter value
+  function updateCounter() {
+    $.ajax({
+      url: 'increment.php',
+      type: 'GET',
+      success: function (response) {
+        $('#visitorCount').text(response);
+      }
+    });
+  }
+
+  // Initial counter update
+  updateCounter();
+
+  // Schedule counter update every minute
+  setInterval(updateCounter, 1500000); // 1200000 milliseconds = 12 minute
+</script>
+
+</body>
+
+</html><button id="scrollTopBtn"><i class="fa fa-long-arrow-up"></i></button>
